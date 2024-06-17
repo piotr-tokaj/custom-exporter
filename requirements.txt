@@ -1,0 +1,8 @@
+# The below are the libraries which are required for all the exporters
+prometheus_client
+
+# Below is to collect docker related networks
+docker
+
+# Match regex
+re
