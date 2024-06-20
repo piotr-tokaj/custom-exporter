@@ -3,6 +3,3 @@ prometheus_client
 
 # Below is to collect docker related networks
 docker
-
-# Match regex
-re

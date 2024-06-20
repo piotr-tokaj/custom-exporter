@@ -1,0 +1,19 @@
+version: '3'
+
+networks:
+  kasm_default_network:
+    external: true
+
+services:
+
+  cmmc-exporter:
+    container_name: cmmc-exporter
+    image: rahulosp/custom-exporter:0.1
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/hostname:/etc/hostname:ro
+    networks:
+      - kasm_default_network
