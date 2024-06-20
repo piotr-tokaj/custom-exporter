@@ -2,10 +2,10 @@ from prometheus_client import start_http_server, Gauge
 import docker
 import re
 # Define the Prometheus gauge
-docker_image_count = Gauge('docker_image_count', 'Number of Docker images matching regex /atxdefense/')
+docker_image_count = Gauge('docker_image_count', 'Number of Docker images matching regex /atx-defense/')
 
 def collect_docker_images():
-    """Function to collect the number of Docker images matching regex /atxdefense/."""
+    """Function to collect the number of Docker images matching regex /atx-defense/."""
     client = docker.from_env()
     images = client.images.list()
     pattern = re.compile(r"atx-defense")
