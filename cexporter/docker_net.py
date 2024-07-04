@@ -1,4 +1,4 @@
-from prometheus_client import start_http_server, Gauge
+from prometheus_client import Gauge
 import docker
 
 # Create a metric to track the number of Docker networks
@@ -11,4 +11,3 @@ def collect_docker_networks():
     z_networks = [network for network in networks if network.name.startswith('z_')]
     docker_network_count.set(len(z_networks))
     return docker_network_count
-
