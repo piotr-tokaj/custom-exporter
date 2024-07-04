@@ -3,3 +3,6 @@ prometheus_client
 
 # Below is to collect docker related networks
 docker
+
+# Below is to use http requests
+requests

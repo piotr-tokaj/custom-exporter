@@ -8,7 +8,7 @@ services:
 
   cmmc-exporter:
     container_name: cmmc-exporter
-    image: rahulosp/custom-exporter:0.1
+    image: rahulosp/custom-exporter:1.0
     ports:
       - 8000:8000
     restart: unless-stopped

@@ -1,4 +1,4 @@
-from prometheus_client import start_http_server, Gauge
+from prometheus_client import Gauge
 import docker
 
 # Define the gauge for KASM services
