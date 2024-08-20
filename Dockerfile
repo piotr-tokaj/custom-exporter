@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 
 # Run docker_network_exporter.py when the container launches
-CMD ["python", "-m", "cexporter.exporter"]
+CMD ["python", "-u", "-m", "cexporter.exporter"]

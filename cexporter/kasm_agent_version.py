@@ -4,7 +4,6 @@ from .metrics import kasm_version
 def collect_kasm_agent_version():
     """Function to collect the version of the Kasm agent container."""
     client = docker.from_env()
-    print("Running agent version collection module")
     containers = client.containers.list(filters={"name": "kasm_agent"})
     if containers:
         kasm_agent = containers[0]
