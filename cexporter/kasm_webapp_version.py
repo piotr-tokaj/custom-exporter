@@ -5,7 +5,6 @@ def collect_kasm_webapp_version():
     """Function to collect the version of the Kasm webapp container."""
     client = docker.from_env()
     containers = client.containers.list(filters={"name": "kasm_api"})
-    print("Running webapp version collection module")
     if containers:
         kasm_api = containers[0]
         version = kasm_api.image.tags[0].split(':')[-1]
