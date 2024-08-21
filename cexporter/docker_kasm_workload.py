@@ -15,5 +15,5 @@ def collect_kasm_workloads():
     
     # Set information about each container
     for container in containers:
-        kasm_workload_info.labels(container_id=container.id, container_name=container.name, image=container.image.tags[0]).set(1)
+        kasm_workload_info.labels(container_id=container.id, container_name=container.name, image=container.image.tags[0]).set_to_current_time()
     return kasm_workload_count, kasm_workload_info
