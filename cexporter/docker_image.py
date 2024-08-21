@@ -13,6 +13,6 @@ def collect_docker_images():
     docker_image_count.set(len(images))
 
     for image in images:
-        docker_image_info.labels(image.tags[0]).set(1)
+        docker_image_info.labels(image.tags[0]).set_to_current_time()
 
     return docker_image_count, docker_image_info
