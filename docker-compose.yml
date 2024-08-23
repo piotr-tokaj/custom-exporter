@@ -8,12 +8,11 @@ services:
 
   cmmc-exporter:
     container_name: cmmc-exporter
-    image: rahulosp/custom-exporter:1.0
+    image: rahulosp/custom-exporter:1.4
     ports:
-      - 8000:8000
+      - "0.0.0.0:8000:8000"
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/hostname:/etc/hostname:ro
-    networks:
-      - kasm_default_network
+      - /home/ansible/ansible.log:/usr/src/app/ansible.log  # Replace this with just /var/log/syslog or any random file if it is not Ansible. This will only be used on Ansible VMs

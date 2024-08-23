@@ -5,7 +5,6 @@ from .docker_kasm_svc import collect_kasm_services
 from .docker_kasm_workload import collect_kasm_workloads
 from .kasm_agent_version import collect_kasm_agent_version 
 from .kasm_webapp_version import collect_kasm_webapp_version
-from .cmmc_vdi_code_version import collect_cmmc_version 
 import time
 import datetime
 
@@ -34,6 +33,7 @@ def collect_kasm_database_metrics():
 def collect_ansible_metrics():
     print(f"[{datetime.datetime.now()}] Collecting Ansible metrics...")
     collect_cmmc_version()
+    collect_ansible_run_results()
 
 
 if __name__ == '__main__':
@@ -46,6 +46,9 @@ if __name__ == '__main__':
     hostname = get_hostname()
 
     if 'ansible' in hostname:
+        from .cmmc_vdi_code_version import collect_cmmc_version
+        from .ansible_output import collect_ansible_run_results
+
         collect_metrics = collect_ansible_metrics
         print(f"Hostname '{hostname}' contains 'ansible'. Starting the Ansible-specific metric collection...")
     elif 'agent' in hostname:
