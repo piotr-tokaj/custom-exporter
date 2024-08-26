@@ -6,3 +6,6 @@ docker
 
 # Below is to use http requests
 requests
+
+# To parse dates from logs
+python-dateutil
