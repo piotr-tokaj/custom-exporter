@@ -1,10 +1,4 @@
 from prometheus_client import start_http_server, Gauge
-from .docker_net import collect_docker_networks
-from .docker_image import collect_docker_images
-from .docker_kasm_svc import collect_kasm_services
-from .docker_kasm_workload import collect_kasm_workloads
-from .kasm_agent_version import collect_kasm_agent_version 
-from .kasm_webapp_version import collect_kasm_webapp_version
 import time
 import datetime
 
@@ -39,10 +33,9 @@ def collect_ansible_metrics():
 if __name__ == '__main__':
 
     print("Starting Custom Exporter...")
-    # Start the Prometheus HTTP server
+    # Start the Prometheus-compatible Custom Exporter HTTP server
     start_http_server(8000)
 
-    # Get the hostname
     hostname = get_hostname()
 
     if 'ansible' in hostname:
@@ -52,12 +45,23 @@ if __name__ == '__main__':
         collect_metrics = collect_ansible_metrics
         print(f"Hostname '{hostname}' contains 'ansible'. Starting the Ansible-specific metric collection...")
     elif 'agent' in hostname:
+        from .docker_kasm_svc import collect_kasm_services
+        from .docker_image import collect_docker_images
+        from .docker_kasm_workload import collect_kasm_workloads
+        from .kasm_agent_version import collect_kasm_agent_version
+        from .docker_net import collect_docker_networks
+
         collect_metrics = collect_kasm_agent_metrics
         print(f"Hostname '{hostname}' contains 'agent'. Starting the Agent-specific metric collection...")
     elif 'webapp' in hostname:
+        from .docker_kasm_svc import collect_kasm_services
+        from .kasm_webapp_version import collect_kasm_webapp_version
+
         collect_metrics = collect_kasm_webapp_metrics
         print(f"Hostname '{hostname}' contains 'webapp'. Starting the Webapp-specific metric collection...")
     elif 'database' in hostname:
+        from .docker_kasm_svc import collect_kasm_services
+
         collect_metrics = collect_kasm_database_metrics
         print(f"Hostname '{hostname}' contains 'database'. Starting the Database-specific metric collection...")
     else:
@@ -70,5 +74,4 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"Error collecting metrics: {e}")
 
-        # Collect metrics every 30 seconds.
         time.sleep(30)
