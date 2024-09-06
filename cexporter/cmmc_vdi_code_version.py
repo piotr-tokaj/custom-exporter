@@ -11,9 +11,11 @@ def collect_cmmc_version():
         response = requests.get(url, headers=headers)
         response.raise_for_status()  # Raise an exception for HTTP errors
         version = response.text.strip()
+        cmmc_vdi_version.clear()
         cmmc_vdi_version.labels(version=version).set(1)
     except requests.exceptions.RequestException as e:
         print(f"Error fetching cmmc vdi code version: {e}")
         version = "unknown"
+        cmmc_vdi_version.clear()
         cmmc_vdi_version.labels(version=version).set(0)
     return cmmc_vdi_version
